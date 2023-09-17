@@ -1,0 +1,42 @@
+{
+	"name": "tectonic-document",
+	"image": "ghcr.io/pzktit/tectonicdev:main",
+	// With the following setup all TeXLive tools required to build document are kept in project folder "cache"
+	// This folder must be created before first build
+	// If you want to sore latex tools in a container, please comment out the following mount directive
+	// Subfolder chache is not required in this case. But rememeber, that in this setup cached tools disappear if you delete the container.
+	// "mounts": [
+	//	"source=${localWorkspaceFolder}/cache,target=/home/vscode/.cache/,type=bind,consistency=cached"
+	// ],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"james-yu.latex-workshop",
+				// "valentjn.vscode-ltex"    
+			],
+			"settings": {
+				// General settings
+				"files.eol": "\n",
+				"editor.formatOnSave": true,
+				"files.associations": {
+					"*.tex": "latex"
+				},
+				// Latex settings
+				"latex-workshop.latex.recipe.default": "tectonic",
+				"latex-workshop.latex.build.clearLog.everyRecipeStep.enabled": false,
+				"latex-workshop.latex.build.forceRecipeUsage": false,
+				// Language settings
+				// "ltex.language": "pl-PL",
+				//"ltex.language": "en-US",
+				//"ltex.ltex-ls.path": "/usr"
+			}
+		}
+	},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "uname -a",
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode",
+	//	"runArgs": ["--rm", "--name=tectonicdev-sample"]
+}
